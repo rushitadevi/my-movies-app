@@ -3,6 +3,7 @@ import MyNav from "./MyNav";
 import DisplayMovies from "./DisplayMovies";
 import Footer from "./Footer";
 import Model from "./Model";
+import SingleMovie from "./SingleMovie";
 
 class MainPage extends Component{
     constructor(props) {
@@ -10,9 +11,20 @@ class MainPage extends Component{
         this.state = ({
             MoviesMI: [],
             MoviesHP: [],
-            filterMovie:""
+            filterMovie:"",
+            showMovie :null
         });
     }
+
+    showSingleMovie =(movie) =>{
+        this.setState({
+            showMovie : movie,
+            showMo:true
+        });
+        console.log(movie);
+    }
+
+    
 
     componentDidMount = async () => {   
         var MovieName=[];
@@ -54,16 +66,20 @@ render(
         <>
         <MyNav/>
         <div className="container mt-4"> 
-        <input type="search" onChange={value=> this.setState({filterMovie:value.currentTarget.value}) } ></input>           
+        <input type="text" onChange={value=> this.setState({filterMovie:value.currentTarget.value}) } width="250px" />           
             {/* <DisplayMovies filterItem={this.state.MoviesMI.map((data)=>data.filter(final=>final.Title.includes(this.state.filterMovie)))} /> */}
             {/* <DisplayMovies filterItem={this.state.MoviesMI.map((data)=>
                 data.filter(final=>final.Title.includes(this.state.filterMovie)))} /> */}
-           
-            <DisplayMovies filterItemHP={this.state.MoviesMI.map((data=>data.filter(
+           <SingleMovie singleMovie={this.state.showMovie} />
+            <DisplayMovies oneMovieSelected={this.showSingleMovie} filterItemHP={this.state.MoviesMI.map((data=>data.filter(
                 final=>final.Title.includes(this.state.filterMovie)
             )))} />
+
+
             
-            <Model />
+            <Model showMo={this.state.showMo} closeModal={()=>this.setState({
+                showMo:false
+            })} />
      
             </div>        
         <Footer/>       

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { CardImg } from "reactstrap"
+import {Model} from "./Model"
 
 class DisplayMovies extends Component {
     constructor(props)
@@ -7,22 +8,24 @@ class DisplayMovies extends Component {
         super(props);
         this.state=({
             imgId:0,
-            showMo:true
-           
+           // showMo:false
+         
         });
 
-        this.showModal = this.showModal.bind(this);
+//        this.showModal = this.showModal.bind(this);
     }
 
    
 
-    showModal = () => {
-        this.setState({ showMo: true });
-     };
+    // showModal = () => {
+    //     this.setState({ showMo: true });
+    //  };
 
-     hideModal = () => {
-        this.setState({ showMo: false });
-      };
+    //  hideModal = () => {
+    //     this.setState({ showMo: false });
+    //   };
+
+    
      
     
     
@@ -40,7 +43,7 @@ class DisplayMovies extends Component {
                                         <CardImg top src={m.Poster}
                                             alt="Card image cap" 
                                             style={{ cursor: "pointer", width: "150px", height: "150px" }}
-                                            onClick={this.showModal}  
+                                            onClick={()=>this.props.oneMovieSelected(m)}  
                                             />
                                     </div>
                                 </div>
@@ -55,8 +58,10 @@ class DisplayMovies extends Component {
                                 <div className="col-md-4 mt-4">
                                     <div className="card">
                                         <CardImg top src={m.Poster}
-                                            alt="Card image cap" onClick={this.showModal}   
-                                            style={{ cursor: "pointer", width: "150px", height: "150px" }} />
+                                            alt="Card image cap"    
+                                            style={{ cursor: "pointer", width: "150px", height: "150px" }} 
+                                            onClick={()=>this.props.oneMovieSelected(m)}  
+                                             />
                                     </div>
                                 </div>
                             </div>
